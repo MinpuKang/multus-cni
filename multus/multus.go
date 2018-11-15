@@ -76,7 +76,9 @@ func getIfname(delegate *types.DelegateNetConf, argif string, idx int) string {
 	if delegate.IfnameRequest != "" {
 		return delegate.IfnameRequest
 	}
-	if delegate.MasterPlugin {
+	// tony update 2018-11-15
+	// 当argif为eth0则依旧返回为eth0
+	if delegate.MasterPlugin || argif == "eth0" {
 		// master plugin always uses the CNI-provided interface name
 		return argif
 	}
